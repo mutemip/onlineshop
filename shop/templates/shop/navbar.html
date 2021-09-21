@@ -1,0 +1,19 @@
+<div class="row">
+    {% for ob in product %}
+        <div class="col-sm-6 col-md-3">
+        <div class="thumbnail">
+            {% if ob.image %}
+                <img src="{{ ob.image.url }}" class="img-responsive">
+            {% endif %}
+        <div class="caption">
+            <strong>{{ ob.name }}</strong>
+            <p>
+                Product name: {{ ob.name }} <br>
+                Description: {{ ob.description }} <br>
+                Available: {{ ob.available }}
+            </p>
+        </div>
+        </div>
+        </div>
+    {% endfor %}
+    </div>

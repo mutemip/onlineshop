@@ -1,0 +1,33 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %} Search {% endblock %}
+
+{% block content %}
+    <div class="row">
+    {% for ob in product %}
+        <div class="col-sm-6 col-md-3">
+        <div class="product-detail">
+            {% if ob.image %}
+                <img src="{% if ob.image %}{{ ob.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" alt="" class="img-responsive">
+                <h1>{{ ob.name }}</h1>
+                    <h2>
+        <a href="{{ ob.category.get_absolute_url }}">
+            {{ ob.category }}
+        </a>
+    </h2>
+                    <p class="price">${{ ob.price }}</p>
+    <form action="{% url 'cart:cart_add' ob.id %}" method="post">
+        {{ cart_product_form.as_table }}
+        {% csrf_token %}
+        <input type="submit" value="Add to cart">
+    </form>
+                {{ ob.description|linebreaks }}
+
+            {% endif %}
+        </div>
+        <br><br>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
